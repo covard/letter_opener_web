@@ -1,8 +1,6 @@
 # letter_opener_web
 
-[![Build Status](https://travis-ci.org/fgrehm/letter_opener_web.png?branch=master)](https://travis-ci.org/fgrehm/letter_opener_web)
-[![Gem Version](https://badge.fury.io/rb/letter_opener_web.png)](http://badge.fury.io/rb/letter_opener_web)
-[![Code Climate](https://codeclimate.com/github/fgrehm/letter_opener_web.png)](https://codeclimate.com/github/fgrehm/letter_opener_web)
+[![Build Status](https://travis-ci.org/fgrehm/letter_opener_web.png?branch=master)](https://travis-ci.org/fgrehm/letter_opener_web) [![Gem Version](https://badge.fury.io/rb/letter_opener_web.png)](http://badge.fury.io/rb/letter_opener_web) [![Code Climate](https://codeclimate.com/github/fgrehm/letter_opener_web.png)](https://codeclimate.com/github/fgrehm/letter_opener_web) [![Gittip](http://img.shields.io/gittip/fgrehm.svg)](https://www.gittip.com/fgrehm/) [![Gitter chat](https://badges.gitter.im/fgrehm/letter_opener_web.png)](https://gitter.im/fgrehm/letter_opener_web)
 
 Gives [letter_opener](https://github.com/ryanb/letter_opener) an interface for
 browsing sent emails.
@@ -14,9 +12,7 @@ Check out http://letter-opener-web.herokuapp.com to see it in action.
 First add the gem to your development environment and run the `bundle` command to install it.
 
 ```ruby
-group :development do
-  gem 'letter_opener_web', '~> 1.0'
-end
+gem 'letter_opener_web', '~> 1.2.0', :group => :development
 ```
 
 ## Usage
@@ -25,7 +21,9 @@ Add to your routes.rb:
 
 ```ruby
 Your::Application.routes.draw do
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
 ```
 
@@ -54,25 +52,16 @@ config.action_mailer.delivery_method = :letter_opener_web
 config.action_mailer.delivery_method = ENV['USER'] == 'vagrant' ? :letter_opener_web : :letter_opener
 ```
 
-If you're using `:letter_opener_web` as your delivery method, you can change the location of the letters by adding the
-following to an initializer (or in development.rb):
-
-```ruby
-LetterOpenerWeb.configure do |config|
-  config.letters_location = Rails.root.join('your', 'new', 'path')
-end
-```
-
 ## Usage on Heroku
 
 Some people use this gem on staging environments on Heroku and to set that up
 is just a matter of moving the gem out of the `development` group and enabling
 the route for all environments on your `routes.rb`.
 
-In other words, your `Gemfile` will have:
+In order words, your `Gemfile` will have:
 
 ```ruby
-gem 'letter_opener_web'
+gem 'letter_opener_web', '~> 1.2.0'
 ```
 
 And your `routes.rb`:
@@ -96,7 +85,7 @@ ideas on [this pull request](https://github.com/ryanb/letter_opener/pull/12).
 
 ## Contributing
 
-1. Fork it and run `bin/setup`
+1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
