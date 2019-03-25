@@ -4,8 +4,8 @@ require_dependency 'letter_opener_web/application_controller'
 
 module LetterOpenerWeb
   class LettersController < ApplicationController
-    before_action :check_style, only: [:show]
-    before_action :load_letter, only: %i[show attachment destroy]
+    before_filter :check_style, only: [:show]
+    before_filter :load_letter, only: %i[show attachment destroy]
 
     def index
       @letters = Letter.search
